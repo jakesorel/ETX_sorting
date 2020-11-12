@@ -49,7 +49,7 @@ if __name__ == "__main__":
     inputs = np.array([X.ravel(), Y.ravel()]).T
 
     n_slurm_tasks = int(os.environ["SLURM_NTASKS"])
-    client = Client(threads_per_worker=1, n_workers=n_slurm_tasks)
+    client = Client(threads_per_worker=1, n_workers=n_slurm_tasks,memory_limit="1GB")
     lazy_results = []
     for inputt in inputs:
         lazy_result = dask.delayed(do_job)(inputt)
