@@ -15,7 +15,7 @@ def do_job(inputt):
     seed_type = "random_circle"
     medium_energy = 5e2
     num_x, num_y = 15, 15
-    T_t = np.logspace(3,-1,5*10**2)
+    T_t = np.logspace(3,-1,5*10**4)
     WAB_WB, WA_WB = inputt
     WB = 1
     W_ET = WAB_WB * WB
@@ -42,13 +42,13 @@ def do_job(inputt):
 if __name__ == "__main__":
     num_x, num_y = 15, 15
 
-    WAB_WB_space = np.linspace(0,2,10)
-    WA_WB_space = np.linspace(0,2,10)
+    WAB_WB_space = np.linspace(0,2,50)
+    WA_WB_space = np.linspace(0,2,50)
     Cs = np.zeros([WAB_WB_space.size,WA_WB_space.size,num_x,num_y])
     X,Y = np.meshgrid(WAB_WB_space,WA_WB_space,indexing="ij")
     inputs = np.array([X.ravel(), Y.ravel()]).T
 
-    n_slurm_tasks = 8#int(os.environ["SLURM_NTASKS"])
+    n_slurm_tasks = int(os.environ["SLURM_NTASKS"])
     client = Client(threads_per_worker=1, n_workers=n_slurm_tasks)
     lazy_results = []
     for inputt in inputs:
