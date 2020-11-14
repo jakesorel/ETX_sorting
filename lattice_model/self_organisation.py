@@ -87,7 +87,7 @@ class ETX:
         E_mat0 = np.zeros([N, N])
         for id_i in [1, 2, 3]:
             for id_j in [1, 2, 3]:
-                E_mat[id_i::3, id_j::3] = -np.random.lognormal(np.log(self.W[id_i, id_j]), self.sigma0[id_i, id_j],
+                E_mat[id_i::3, id_j::3] = -np.random.normal(self.W[id_i, id_j], self.sigma0[id_i, id_j],
                                                                (int((N - 1) / 3), int((N - 1) / 3)))
                 E_mat0[id_i::3, id_j::3] = -self.W[id_i, id_j]
         self.E_mat0 = E_mat0
@@ -1955,7 +1955,7 @@ class ETX_continuous:
         self.ID_mat_i,self.ID_mat_j = np.meshgrid(self.dictionary,self.dictionary,indexing="ij")
         for i in range(3):
             for j in range(3):
-                E_mat[(self.ID_mat_i==i)&(self.ID_mat_j==j)] = -np.random.lognormal(np.log(self.W[i, j]), self.sigma0[i, j],(N_list[i+1]*N_list[j+1]))
+                E_mat[(self.ID_mat_i==i)&(self.ID_mat_j==j)] = -np.random.normal(self.W[i, j], self.sigma0[i, j],(N_list[i+1]*N_list[j+1]))
         mask = np.zeros_like(E_mat)
         rng = np.arange(E_mat.shape[0])
         for i in rng:
