@@ -12,4 +12,4 @@
 
 source activate apical_domain
 
-python vary_heterogeneity_WET.py "$1"
+python vary_heterogeneityWET.py "$1"
